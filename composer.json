@@ -1,0 +1,15 @@
+{
+    "name": "sevensenders/sqs-sample-php",
+    "description": "Sample Application Demonstrating the Usage of Consuming SQS Queues from Sevensenders",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Attila Fulop",
+            "email": "affff@sevensenders.com"
+        }
+    ],
+    "require": {
+        "aws/aws-sdk-php": "^3.134"
+    }
+}
