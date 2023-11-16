@@ -25,3 +25,20 @@ foreach($messages as $message) {
     echo $message['Body'] . "\n";
 }
 
+
+// Delete a message from the queue
+foreach($messages as $message) {
+    $client->deleteMessage(['QueueUrl' => $message, 'ReceiptHandle' => $message['ReceiptHandle']]);
+}
+
+// Delete batch message from the queue
+$entries = [];
+foreach ($messages as $message) {
+    $entries[] = [
+        'Id' => $message['MessageId'], // A unique identifier
+        'ReceiptHandle' => $message['ReceiptHandle'] // The receipt handle
+    ];
+}
+
+$client->deleteMessageBatch(['QueueUrl' => $messages, 'Entries' => $entries]);
+
