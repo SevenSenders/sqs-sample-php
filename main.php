@@ -14,6 +14,7 @@ $credentials = [
 
 $client = new \Aws\Sqs\SqsClient($credentials);
 
+//Example for receiving messages
 $result = $client->receiveMessage(['QueueUrl' => '', 'MaxNumberOfMessages' => 10]);
 
 $messages = $result->get('Messages') ?: [];
@@ -24,4 +25,21 @@ foreach($messages as $message) {
     echo $message['MessageId'] . "\n";
     echo $message['Body'] . "\n";
 }
+
+
+// Example for deleting messages one by one
+foreach($messages as $message) {
+    $client->deleteMessage(['QueueUrl' => $message, 'ReceiptHandle' => $message['ReceiptHandle']]);
+}
+
+// Example for deleting messages in batch
+$entries = [];
+foreach ($messages as $message) {
+    $entries[] = [
+        'Id' => $message['MessageId'], // A unique identifier
+        'ReceiptHandle' => $message['ReceiptHandle'] // The receipt handle
+    ];
+}
+
+$client->deleteMessageBatch(['QueueUrl' => $messages, 'Entries' => $entries]);
 
