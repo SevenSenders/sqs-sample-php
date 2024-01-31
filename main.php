@@ -5,7 +5,7 @@ require_once __DIR__.'/vendor/autoload.php';
 $credentials = [
     'region' => 'eu-west-1',
     'version' => 'latest',
-    'endpoint' => 'https://analytics-api.7senders.com/queue.xml',
+    'endpoint' => 'https://sqs.sevensenders.com/api/v1/shipment-events',
     'credentials' => [
         'key'    => '<API-KEY>',
         'secret' => '',
